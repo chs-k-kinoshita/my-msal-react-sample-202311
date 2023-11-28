@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
@@ -27,7 +28,11 @@ export default function App() {
     <div className="App">
       {/*ログイン成功時に表示*/}
       <AuthenticatedTemplate>
-        <AzureAuthedAPITest />
+        <Routes>
+          <Route path="/" element={<AzureAuthedAPITest />} />
+          <Route path="/page2" element={<h1>Page2</h1>} />
+          <Route path="/page3" element={<h1>Page3</h1>} />
+        </Routes>
       </AuthenticatedTemplate>
 
       {/*未ログイン時に表示*/}
