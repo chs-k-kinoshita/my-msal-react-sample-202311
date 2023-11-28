@@ -4,10 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+
+// msalInstanceを作成
+const msalInstance = new PublicClientApplication({
+  auth: {
+    clientId: process.env.REACT_APP_CLIENT_ID,
+    authority: `https://login.microsoftonline.com/${
+      process.env.REACT_APP_AUTHORITY
+    }`,
+    redirectUri: process.env.REACT_APP_REDIRECT_URI,
+  },
+  cache: {
+    cacheLocation: "sessionStorage",
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MsalProvider instance={msalInstance}>
+      <App />
+    </MsalProvider>
   </React.StrictMode>
 );
 
